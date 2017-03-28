@@ -16,13 +16,12 @@ int threadid;
 	{
 		threadid = omp_get_thread_num();
 	    printf("Hello from thread %d\n", threadid);
-	    // the single directive means that the first thread that reaches
-	    // this block executes it.
-	    #pragma omp single
+	    // Only the master thread executes this:
+	    #pragma omp master
 		    {
-		    	printf("Thread %d got here first!\n", threadid);
+		    	printf("Master Thread %d executing single block \n", threadid);
 		    }
-	    printf("Past the sync barrier on thread %d\n", threadid);
+	    printf("Past the master block on thread %d\n", threadid);
 
 }
 	return 0;
